@@ -9,15 +9,15 @@ import { Button } from '../components/button/Button';
 const Contacto = () => (
   <Card color="transparent" shadow={false}>
     <div className="flex items-start">
-    <h1 className="text-2xl text-gray-700" >
-      Contiza con nosotros
-    </h1>
-    <h2 color="gray" className="ml-3 mt-1 text-primary-600">
-      Obtén el mejor plan de ISAPRE
-    </h2>
+      <h1 className="text-2xl text-gray-700" >
+        Contiza con nosotros
+      </h1>
+      <h2 color="gray" className="ml-3 mt-1 text-primary-600">
+        Obtén el mejor plan de ISAPRE
+      </h2>
     </div>
     <section className="flex justify-center items-center">
-      <form className="w-full max-w-4xl p-5">
+      <form className="w-full max-w-xl p-5">
         <div className="flex flex-wrap -mx-2">
           {/* Nombre Completo - Ocupa todo el ancho */}
           <div className="w-full px-2 mb-4">
