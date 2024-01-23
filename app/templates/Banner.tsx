@@ -10,7 +10,7 @@ const Banner = () => (
       title="Somos agentes de venta de ISAPRES con experiencia"
       subtitle="Te podemos ayudar"
       button={
-        <Link href="https://creativedesignsguru.com/category/nextjs/">
+        <Link href="/#contacto-ejecutiva-isapre">
           <Button>Quiero cotizar</Button>
         </Link>
       }
