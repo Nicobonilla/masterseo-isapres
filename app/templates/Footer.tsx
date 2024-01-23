@@ -57,18 +57,10 @@ const Footer = () => (
         }
       >
         <li className='mx-5'>
-          <Link href="/">Nosotros</Link>
+          <Link href="/#top">Home</Link>
         </li>
         <li className='mx-5'>
-          <Link href="/">Planes</Link>
-        </li>
-        <li className='mx-5'>
-          <Link href="/">Boletín</Link>
-        </li>
-        <li className='mx-5'>
-          <Link href="https://github.com/ixartz/Next-JS-Landing-Page-Starter-Template">
-            Cotizar
-          </Link>
+          <Link href="/informacion-isapres-chile">Boletín</Link>
         </li>
       </CenteredFooter>
     </Section>

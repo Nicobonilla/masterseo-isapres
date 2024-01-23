@@ -12,7 +12,6 @@ const HeroOneButton = (props: IHeroOneButtonProps) => (
       {props.title}
     </h1>
     <div className="mb-16 mt-4 text-2xl">{props.description}</div>
-
     {props.button}
   </header>
 );

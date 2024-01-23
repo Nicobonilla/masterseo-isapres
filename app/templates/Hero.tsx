@@ -3,7 +3,7 @@ import Link from 'next/link';
 import { Button } from '../components/button/Button';
 import { HeroOneButton } from '../components/hero/HeroOneButton';
 import { Section } from '../components/layout/Section';
-import { Contacto } from './Contacto';
+import { ContactForm } from './ContactForm';
 import { CarouselHero } from '../components/carousel/CarouselHero';
 import { CarouselIsapres } from '../components/carousel/carouselIsapres';
 
@@ -15,14 +15,14 @@ const Hero = () => (
       <HeroOneButton
         title={
           <>
-            {'The modern landing page for\n'}
-            <span className="text-primary-500">React developers</span>
+            {'Aprovecha al máximo tu 7%\n'}
+            <span className="text-primary-500">Ejecutivas certificadas</span>
           </>
         }
-        description="The easiest way to build a React landing page in seconds."
+        description="La forma más rápida y convenienta para contratar Planes de Salud Previsional."
         button={
-          <Link href="https://creativedesignsguru.com/category/nextjs/">
-            <Button xl>Download Your Free Theme</Button>
+          <Link href="/#contacto-ejecutiva-isapre">
+            <Button xl>Quiero cotizar</Button>
           </Link>
         }
       />
@@ -35,8 +35,8 @@ const Hero = () => (
     </Section>
 
     <Section yPadding="pt-10 pd-10 pb-32">
-      <div className="flex justify-center items-center" >
-        <Contacto />
+      <div id='contacto-ejecutiva-isapre' className="flex justify-center items-center" >
+        <ContactForm />
       </div>
     </Section>
   </>

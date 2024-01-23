@@ -24,7 +24,7 @@ const Base = (props: IBaseProps) => {
       <Background color="bg-background text-foreground">
         <Section yPadding="py-6">
           <NavbarTwoColumns logo={<Logo xl />}>
-            <div></div>
+            <div id='top'></div>
           </NavbarTwoColumns>
         </Section>
         {props.children}
