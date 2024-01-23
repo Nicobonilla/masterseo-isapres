@@ -1,6 +1,6 @@
 'use client'
 import { Base } from '../templates/Base';
-import { InformacionIsapresChile } from '../templates/InformacionIsapresChile';
+import { InformacionIsapresChileItem } from './InformacionIsapresChileItem';
 import { Section } from '../components/layout/Section';
 import { articlesData } from "../informacion-isapres-chile/boletin-isapres";
 
@@ -19,15 +19,13 @@ export const normalizeId = (text: string): string => {
 };
 
 export default function Page() {
-
-  const list_titles = [];
   const extractedData = articlesData.map(article => {
-    let extracted = { "h1": '', "p": '', "id_noticia": '' };
+    let extracted = { "h1": '', "p": '', "idNoticia": '' };
     // Encuentra el primer elemento h1
     const h1Element = article.find(element => element.h1);
     if (h1Element) {
       extracted.h1 = String(h1Element.h1);
-      extracted.id_noticia = normalizeId(String(h1Element.h1));
+      extracted.idNoticia = normalizeId(String(h1Element.h1));
     }
     // Encuentra el primer elemento p
     const pElement = article.find(element => element.p);
@@ -40,12 +38,12 @@ export default function Page() {
     <>
       <Base>
         <Section>
-          <div className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
+          <div className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
           {extractedData.map((article,index)=>(
-            <InformacionIsapresChile 
+            <InformacionIsapresChileItem 
               title={article.h1}
               description={article.p} 
-              id_noticia={article.id_noticia}
+              idNoticia={article.idNoticia}
               />
               ))}
           </div>
