@@ -24,24 +24,7 @@ const Base = (props: IBaseProps) => {
       <Background color="bg-background text-foreground">
         <Section yPadding="py-6">
           <NavbarTwoColumns logo={<Logo xl />}>
-            <li className='sm:pr-3 lg:pr-6 xl:pr-12'>
-              <Link href="https://github.com/ixartz/Next-JS-Landing-Page-Starter-Template">
-                Nosotros
-              </Link>
-            </li>
-            <li className='sm:pr-3 lg:pr-6 xl:pr-12'>
-              <Link href="https://github.com/ixartz/Next-JS-Landing-Page-Starter-Template">
-                Planes
-              </Link>
-            </li>
-            <li className='sm:pr-3 lg:pr-6 xl:pr-12'>
-              <Link href="/informacion-isapres-chile">
-                Boletín
-              </Link>
-            </li>
-            <li>
-              <Link href="/">Cotizar</Link>
-            </li>
+            <div></div>
           </NavbarTwoColumns>
         </Section>
         {props.children}
