@@ -6,9 +6,7 @@ import { Section } from '../components/layout/Section';
 import { NavbarTwoColumns } from '../components/navigation/NavbarTwoColumns';
 import { Logo } from './Logo';
 import { Banner } from './Banner';
-import { Hero } from './Hero';
 import { Footer } from './Footer';
-import Link from 'next/link';
 
 import type { ReactNode } from 'react';
 

@@ -1,5 +1,7 @@
 import { Typography, Button } from "@material-tailwind/react";
 import Link from "next/link";
+import Image from "next/image";
+
 
 type ICarouseHeroItem = {
     title: string;
@@ -11,10 +13,11 @@ const CarouselHeroItem = ({ title, description, image }: ICarouseHeroItem) => {
 
     return (
         <div className="relative h-[90vh] w-full">
-            <img
+            <Image className="h-full w-full object-cover"
                 src={image}
+                height={'900'}
+                width={'1000'}
                 alt="image 1"
-                className="h-full w-full object-cover"
             />
             <div className="absolute inset-0 grid h-full w-full place-items-center bg-black/60">
                 <div className="w-3/4 text-center md:w-2/4">

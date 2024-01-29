@@ -14,7 +14,7 @@ const CarouselHero = ({autoplay}: ICarousel) => (
       <CarouselHeroItem
         title={"Cotiza Tu Mejor Plan"}
         description={"Compartenos tus datos y te contactaremos enseguida con los planes de salud ISAPRES más convenientes para ti."}
-        image={"https://images.unsplash.com/photo-1497436072909-60f360e1d4b1?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2560&q=80"}
+        image={"/images/family-1.jpg"}
       />
       <CarouselHeroItemIsapre
         title={"The Beauty of Nature"}
@@ -23,7 +23,7 @@ const CarouselHero = ({autoplay}: ICarousel) => (
       <CarouselHeroItem
         title={"Cotiza Tu Mejor Plan"}
         description={"Compartenos tus datos y te contactaremos enseguida con los planes de salud ISAPRES más convenientes para ti."}
-        image={"https://images.unsplash.com/photo-1518623489648-a173ef7824f3?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2762&q=80"}
+        image={"/images/family-2.jpg"}
       />
     </Carousel>
   </div>

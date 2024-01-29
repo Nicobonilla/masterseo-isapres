@@ -5,6 +5,7 @@ import { Section } from '../../components/layout/Section';
 import { usePathname } from 'next/navigation';
 import { normalizeId } from '../page';
 import { useEffect, useState } from 'react';
+import Image from 'next/image';
 
 type htmlElement = {
   h1?: string;
@@ -12,21 +13,21 @@ type htmlElement = {
   p?: string;
   vineta?: string[];
   iNoticia?: string;
+  urlImg?: string;
 };
 
 export default function Page( { params }: { params: { id_noticia: string } } ) {
   
   const pathname = usePathname().split("/")[2]
-
   const [article, setArticle] = useState<htmlElement[] | null>(null);
 
   function encontrarArticuloPorH1(articlesData: htmlElement[][], idNoticia: string) {
     return articlesData.find(articulo =>
       articulo.some(seccion =>
-        seccion.h1 !== undefined && normalizeId(seccion["h1"]) === idNoticia)
+        seccion.h1 && normalizeId(seccion["h1"]) === idNoticia)
     );
   }
-  
+
   useEffect(() => {
     const idNoticiaStr = Array.isArray(pathname) ? pathname[0] : pathname;
     if (idNoticiaStr) {
@@ -40,22 +41,33 @@ export default function Page( { params }: { params: { id_noticia: string } } ) {
   if (!article) {
     return <Base><Section>Cargando o artículo no encontrado - pathname: {pathname}</Section></Base>;
   }
+  console.log(article)
   return (
     <Base>
-      <Section>
+      <Section yPadding='py-0'>
         {
           article.map((element, index) => (
-            <div>
-              {element.h1 && <h1 className="text-3xl py-11  font-bold">{element.h1}</h1>}
-              {element.h2 && <h2 className="text-lg font-semibold mb-1">{element.h2}</h2>}
-              {element.p && <p className="mb-3 text-justify">{element.p}</p>}
-              {element.vineta && Array.isArray(element.vineta) && (
-                <ul className="list-disc pl-5 space-y-2">
-                  {element.vineta.map((item, index) => <li key={index}>{item}</li>)}
-                </ul>
-              )}
-            </div>
-          ))}
+            <div key={index}> 
+              {element.urlImg && (
+              <div className="relative w-full h-32">
+                <Image src={element.urlImg}
+                  alt={pathname}
+                  layout="fill"
+                  objectFit="cover" 
+                  className="w-full h-full" 
+                  />
+              </div>)}
+                {element.h1 && <h1 className="text-3xl py-11  font-bold">{element.h1}</h1>}
+                {element.h2 && <h2 className="text-lg font-semibold mb-1">{element.h2}</h2>}
+                {element.p && <p className="mb-3 text-justify">{element.p}</p>}
+                {element.vineta && Array.isArray(element.vineta) && (
+                  <ul className="list-disc pl-5 space-y-2">
+                    {element.vineta.map((item, index) => <li key={index}>{item}</li>)}
+                  </ul>
+                )}
+              </div>
+          ))
+          }
       </Section>
     </Base>
   );

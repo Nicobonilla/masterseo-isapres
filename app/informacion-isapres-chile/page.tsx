@@ -19,8 +19,9 @@ export const normalizeId = (text: string): string => {
 };
 
 export default function Page() {
+
   const extractedData = articlesData.map(article => {
-    let extracted = { "h1": '', "p": '', "idNoticia": '' };
+    let extracted = { "h1": '', "p": '', "idNoticia": '', "urlImg": ''};
     // Encuentra el primer elemento h1
     const h1Element = article.find(element => element.h1);
     if (h1Element) {
@@ -30,6 +31,9 @@ export default function Page() {
     // Encuentra el primer elemento p
     const pElement = article.find(element => element.p);
     if (pElement) extracted.p = String(pElement.p);
+    // Encuentra el primer elemento urlImg
+    const urlImgElement = article.find(element => element.urlImg);
+    if (urlImgElement) extracted.urlImg = String(urlImgElement.urlImg);
     return extracted;
   });
 
@@ -39,11 +43,13 @@ export default function Page() {
       <Base>
         <Section>
           <div className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
-          {extractedData.map((article,index)=>(
+          {extractedData.map( article => (
             <InformacionIsapresChileItem 
+              key={article.idNoticia}
               title={article.h1}
               description={article.p} 
               idNoticia={article.idNoticia}
+              urlImg={article.urlImg}
               />
               ))}
           </div>
