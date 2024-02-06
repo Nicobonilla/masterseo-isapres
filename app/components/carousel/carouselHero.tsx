@@ -1,16 +1,15 @@
 import { Carousel, Typography, Button } from "@material-tailwind/react";
 import { CarouselHeroItem } from "./CarouselHeroItem";
 import { CarouselHeroItemIsapre } from "./CarouselHeroItemIsapre";
-import { ReactNode } from "react";
 
 type ICarousel = {
-  children: ReactNode
   autoplay?: false | true;
 }
 
-const CarouselHero = ({autoplay}: ICarousel) => (
+const CarouselHero = ({autoplay}: ICarousel) => {
+  return(
   <div>
-    <Carousel autoplay={false} >
+    <Carousel autoplay={true} placeholder={"thePlaceHolder"} >
       <CarouselHeroItem
         title={"Cotiza Tu Mejor Plan"}
         description={"Compartenos tus datos y te contactaremos enseguida con los planes de salud ISAPRES más convenientes para ti."}
@@ -27,6 +26,6 @@ const CarouselHero = ({autoplay}: ICarousel) => (
       />
     </Carousel>
   </div>
-);
+)};
 
 export { CarouselHero };  

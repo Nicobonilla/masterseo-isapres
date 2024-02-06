@@ -1,8 +1,8 @@
-'use client'
+'use server';
 import { Base } from './templates/Base';
 import { Hero } from './templates/Hero';
 
-export default function Page() {
+export default async function Page() {
   return (
     <>
       <Base>

@@ -5,7 +5,7 @@ import { HeroOneButton } from '../components/hero/HeroOneButton';
 import { Section } from '../components/layout/Section';
 import { ContactForm } from './ContactForm';
 import { CarouselHero } from '../components/carousel/CarouselHero';
-import { CarouselIsapres } from '../components/carousel/carouselIsapres';
+import { CarouselIsapres } from '../components/carousel/CarouselIsapres';
 
 
 const Hero = () => (
