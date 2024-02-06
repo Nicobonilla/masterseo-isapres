@@ -18,7 +18,7 @@ const Base = (props: IBaseProps) => {
   const { title, description } = AppConfig;
   return (
     <>
-      <Meta title={title} description={description} />
+      {/* <Meta title={title} description={description} />z */}
       <Background color="bg-background text-foreground">
         <Section yPadding="py-6">
           <NavbarTwoColumns logo={<Logo xl />}>

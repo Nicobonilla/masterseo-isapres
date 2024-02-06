@@ -1,57 +1,56 @@
-'use client'
+'use client';
 import { Base } from '../templates/Base';
 import { InformacionIsapresChileItem } from './InformacionIsapresChileItem';
 import { Section } from '../components/layout/Section';
-import { articlesData } from "../informacion-isapres-chile/boletin-isapres";
+import { Metadata } from 'next';
+import React, { useEffect, useState } from 'react';
 
-export const normalizeId = (text: string): string => {
-  text = text.normalize('NFD').replace(/[\u0300-\u036f]/g, '')
-    // Convertir a minúsculas
-    .toLowerCase()
-    // Eliminar todo lo que no sea alfanumérico
-    .replace(/[^a-z0-9 ]/g, '')
-    // Reemplazar espacios por '-'
-    .replace(/\s+/g, '-')
-    // Eliminar '-' al inicio y al final si los hay
-    .replace(/^-+|-+$/g, '');
-  console.log("normalize: " + text)
-  return text;
+
+type Article = {
+  id: number;
+  h1: string;
+  idnoticia: string;
+  urlimg: string;
+  content: string;
 };
 
+
 export default function Page() {
+  const [articles, setArticles] = useState<Article[]>([]);
 
-  const extractedData = articlesData.map(article => {
-    let extracted = { "h1": '', "p": '', "idNoticia": '', "urlImg": ''};
-    // Encuentra el primer elemento h1
-    const h1Element = article.find(element => element.h1);
-    if (h1Element) {
-      extracted.h1 = String(h1Element.h1);
-      extracted.idNoticia = normalizeId(String(h1Element.h1));
-    }
-    // Encuentra el primer elemento p
-    const pElement = article.find(element => element.p);
-    if (pElement) extracted.p = String(pElement.p);
-    // Encuentra el primer elemento urlImg
-    const urlImgElement = article.find(element => element.urlImg);
-    if (urlImgElement) extracted.urlImg = String(urlImgElement.urlImg);
-    return extracted;
-  });
+  useEffect(() => {
+    // Define una función asíncrona dentro del efecto
+    const fetchData = async () => {
+      const content_elements = await fetch('/api/resume_all_articles', {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+      const data_articles = await content_elements.json();
+      setArticles(data_articles);
+    };
 
+    // Invoca la función asíncrona
+    fetchData();
+  }, []);
 
   return (
     <>
       <Base>
         <Section>
           <div className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
-          {extractedData.map( article => (
-            <InformacionIsapresChileItem 
-              key={article.idNoticia}
-              title={article.h1}
-              description={article.p} 
-              idNoticia={article.idNoticia}
-              urlImg={article.urlImg}
+            {
+            
+            articles.map((article) => (
+              <InformacionIsapresChileItem
+                key={article.id}
+                title={article.h1}
+                description={article.content}
+                idNoticia={article.idnoticia}
+                urlImg={article.urlimg}
               />
-              ))}
+            ))}
           </div>
         </Section>
       </Base>

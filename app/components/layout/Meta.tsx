@@ -1,6 +1,7 @@
 import Head from 'next/head';
 import { NextSeo } from 'next-seo';
 import { AppConfig } from '../utils/AppConfig';
+import { Metadata } from 'next';
 
 // Assuming you have a BASE_PATH constant in your AppConfig or similar config file
 const { BASE_PATH } = AppConfig;
@@ -46,7 +47,7 @@ const Meta = (props: IMetaProps) => {
       key="favicon"
     />
   </Head>
-  <NextSeo
+  {/* <NextSeo
     title={props.title}
     description={props.description}
     canonical={props.canonical}
@@ -57,7 +58,7 @@ const Meta = (props: IMetaProps) => {
       locale: AppConfig.locale,
       site_name: AppConfig.site_name,
     }}
-  />
+  /> */}
 </>
 )}
 export { Meta };
