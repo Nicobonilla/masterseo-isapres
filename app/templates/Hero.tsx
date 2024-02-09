@@ -1,4 +1,4 @@
-'use client';
+'use server';
 import Link from 'next/link';
 import { Button } from '../components/button/Button';
 import { HeroOneButton } from '../components/hero/HeroOneButton';
@@ -8,8 +8,9 @@ import { CarouselHero } from '../components/carousel/CarouselHero';
 import { CarouselIsapres } from '../components/carousel/CarouselIsapres';
 
 
-const Hero = () => (
-  <>
+export default async function Hero () {
+  return(
+  <div>
     <CarouselHero />
     <Section yPadding="pt-40 pd-10 pb-32">
       <HeroOneButton
@@ -39,7 +40,5 @@ const Hero = () => (
         <ContactForm />
       </div>
     </Section>
-  </>
-);
-
-export { Hero };
+  </div>
+)};

@@ -1,9 +1,7 @@
-"use client";
-import { Base } from "../../templates/Base";
+"use server";
 import { Section } from "../../components/layout/Section";
-import Image from "next/image";
-import { useState, useEffect } from "react";
-import { usePathname } from "next/navigation";
+import ArticleLayout from "./ArticleLayout";
+import { Metadata, ResolvingMetadata } from "next";
 
 type Contenido = {
   id: number;
@@ -21,69 +19,46 @@ type Titles = {
   idnoticia: string;
 };
 
-export default function Page() {
-  const [title, setTitle] = useState<Titles>({
-    id: 0,
-    urlimg: "",
-    h1: "",
-    idnoticia: "",
-  });
-  const [contenido, setContenido] = useState<Contenido[]>([]);
-  const path = usePathname();
-  const pathname = path ? path.split("/").pop() : "";
-  useEffect(() => {
-    const fetchData = async () => {
-      const response = await fetch(`/api/articles/${pathname}`, {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
-      if (!response.ok) throw new Error("Network response was not ok.");
-      const data_articles = await response.json();
-      const { titles, content } = data_articles.data;
-      setTitle(titles);
-      setContenido(content);
-    };
+type Props = {
+  params: {
+    id_noticia: string;
+    data: { titles: Titles; content: Contenido[] };
+  };
+};
 
-    fetchData();
-  }, [pathname]);
+export async function generateMetadata(
+  { params }: Props,
+  parent: ResolvingMetadata
+): Promise<Metadata> {
+  const { data }  = await getArticle(params.id_noticia);
+  return {
+    title: await data.titles,
+  };
+};
+// Return a list of `params` to populate the [slug] dynamic segment
+export async function generateStaticParams() {
+  const posts = await fetch(
+    "http://localhost:3000/api/resume_all_articles"
+  ).then((res) => res.json());
+  return posts.map((article: Titles) => ({
+    id_noticia: article.idnoticia,
+  }));
+}
 
+async function getArticle(id_noticia : string) {
+  const response = await fetch(
+    `http://localhost:3000/api/articles/${id_noticia}`
+  );
+  if (!response.ok) throw new Error("Network response was not ok.");
+  return await response.json();
+}
+
+export default async function Page({ params }: Props) {
+  const { id_noticia } = params;
+  const data = await getArticle(id_noticia);
   return (
-    <Base>
-      <Section yPadding="py-0">
-        <div className="relative w-full h-32">
-          {title.urlimg && pathname && (
-            <Image
-              src={title.urlimg}
-              alt={pathname}
-              layout="fill"
-              objectFit="cover"
-              className="w-full h-full"
-            />
-          )}
-        </div>
-        {title.h1 && (
-          <h1 className="text-3xl pt-11 pb-3 font-bold">{title.h1}</h1>
-        )}
-        {contenido.map((element, index) => (
-          <div key={index}>
-            {element.element_type == "H2" && (
-              <h2 className="text-lg font-semibold mt-5 mb-2">
-                {element.content}
-              </h2>
-            )}
-            {element.element_type == "P" && (
-              <p className="text-justify">{element.content}</p>
-            )}
-            {element.element_type == "VINETA" && (
-              <ul className="list-disc pl-12 space-y-2">
-                <li>{element.content}</li>
-              </ul>
-            )}
-          </div>
-        ))}
-      </Section>
-    </Base>
+    <Section yPadding="py-0">
+      <ArticleLayout params={data} />
+    </Section>
   );
 }

@@ -25,9 +25,8 @@ const CarouselIsapres = () => {
               <CardContent className="sm:h-[50vh] md:h-[50vh] lg:h-[15vh] flex items-center justify-center p-2">
                 <Image
                   src={imageByIndex(index)}
-                  height={"200"}
-                  width={"800"}
-                  objectFit="contain"
+                  height={200}
+                  width={800}
                   alt=""
                 />
               </CardContent>

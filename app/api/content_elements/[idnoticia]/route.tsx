@@ -7,7 +7,6 @@ const { json } = NextResponse;
 // Asumiendo que este endpoint solo manejará peticiones GET
 export async function GET(req: NextRequest) {
   const url = new URL(req.url);
-  console.log(url)
   const idnoticia = url.pathname.split('/').pop(); // O alguna lógica similar que refleje tu estructura de ruta
   try {
     const prisma = new PrismaClient();

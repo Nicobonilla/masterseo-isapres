@@ -1,4 +1,3 @@
-'use client';
 import Link from "next/link";
 import { Background } from "../components/background/Background";
 import { CenteredFooter } from "../components/footer/CenteredFooter";
@@ -6,11 +5,12 @@ import { Section } from "../components/layout/Section";
 import { Logo } from "./Logo";
 import { usePathname } from "next/navigation";
 
-const Footer = () => {
-  const path = usePathname();
-  const pathname: string | null = path.split("/")[1];
-  const pathname2 = path.split("/")[2];
-  console.log(pathname2);
+// type Props = {
+//   params : { id_noticia: string}
+// }
+const Footer = ( { params } : Props) => {
+  // const { id_noticia } = params; 
+  // const pathname: string | null = path.split("/")[1];
   return (
     <Background color="bg-gray-100">
       <Section>
@@ -94,11 +94,11 @@ const Footer = () => {
             <Link href="/#top">Home</Link>
           </li>{" "}
           { 
-          ((!pathname) || (pathname == "informacion-isapres-chile" && pathname2)) && (
+          // ((!pathname) || (pathname == "informacion-isapres-chile" && id_noticia)) && (
             <li className="mx-5">
               <Link href="/informacion-isapres-chile">Boletín</Link>
             </li>
-          )
+          // )
           }
         </CenteredFooter>
       </Section>
