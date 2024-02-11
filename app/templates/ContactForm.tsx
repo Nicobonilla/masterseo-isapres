@@ -1,8 +1,9 @@
+"use client";
 import { Card, Input, Checkbox, Typography } from "@material-tailwind/react";
 import { Button } from "../components/button/Button";
 import { useState } from "react";
 
-const ContactForm = () => {
+export default function ContactForm() {
   const [formulario, setFormulario] = useState({
     nombre: "",
     rut: "",
@@ -50,12 +51,15 @@ const ContactForm = () => {
 
   return (
     <Card color="transparent" shadow={false}>
-      <div className="grid-2 items-start">
-        <h1 className="text-4xl text-gray-700">Contiza con nosotros</h1>
-        <h2 color="gray" className="md:mr-32 text-end text-primary-600">
-          Obtén el mejor plan de ISAPRE
+      <header className="grid-2 text-center">
+        <h1 className="whitespace-pre-line text-5xl font-bold leading-hero text-gray-900">
+          Contiza con nosotros
+        </h1>
+        <h2 color="gray" className="mb-5 mt-4 text-sm md:text-xl lg:text-2xl text-primary-600">
+          Déjanos tus datos y te contactaremos para ayudarte a cotizar Planes de
+          ISAPRE
         </h2>
-      </div>
+      </header>
       <section className="flex justify-center items-center">
         <form onSubmit={handleSubmit} className="w-full max-w-xl p-5">
           <div className="flex flex-wrap -mx-2">
@@ -206,6 +210,4 @@ const ContactForm = () => {
       </section>
     </Card>
   );
-};
-
-export { ContactForm };
+}
