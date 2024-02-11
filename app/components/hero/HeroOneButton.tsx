@@ -12,7 +12,7 @@ export default function HeroOneButton( props : IHeroOneButtonProps){
     <h1 className="whitespace-pre-line text-5xl font-bold leading-hero text-gray-900">
       {props.title}
     </h1>
-    <div className="mb-16 mt-4 text-2xl">{props.description}</div>
+    <div className="mb-5 mt-4 text-2xl">{props.description}</div>
     {props.button}
   </header>
 )
