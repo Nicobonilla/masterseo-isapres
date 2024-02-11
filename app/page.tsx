@@ -1,42 +1,78 @@
-"use client";
+"use server";
 import Link from "next/link";
-import { Section } from "./components/layout/Section";
-import { ContactForm } from "./templates/ContactForm";
-import { CarouselIsapres } from "./components/carousel/CarouselIsapres";
-import CarouselHeroItem  from "./components/carousel/CarouselHeroItem";
-import HeroButton from './components/server/HeroButton';
-import dynamic from 'next/dynamic';
-import { useState, useEffect} from 'react';
-import CarouselHero from './components/carousel/CarouselHero';
+import dynamic from "next/dynamic";
+import Image from "next/image";
+import HeroOneButton from "./components/hero/HeroOneButton";
+import { Button } from "./components/button/Button";
 
-export default function Page() {
-  const [isComponentLoaded, setIsComponentLoaded] = useState(false);
-  
-  useEffect(() => {
-    // Aquí puedes realizar operaciones adicionales si necesitas
-    setIsComponentLoaded(true); // Esto activará la renderización del componente dinámico
-  }, []); // El arreglo vacío asegura que este efecto se ejecute solo una vez
+const DCarouselHero = dynamic(
+  () => import("./components/carousel/CarouselHero"),
+  {
+    ssr: false,
+    loading: () => (
+      <div className="relative h-[90vh] w-full">
+        <Image
+          className="h-full w-full object-cover"
+          src={"/images/family-1.jpg"}
+          height={900}
+          width={1000}
+          alt="/images/family-1.jpg"
+          priority
+        />{" "}
+        <div className="absolute inset-0 grid h-full w-full place-items-center bg-black/60"></div>
+      </div>
+    ),
+  }
+);
+const DCarouselIsapres = dynamic(
+  () => import("./components/carousel/CarouselIsapres"),
+  { ssr: false }
+);
+const DContactForm = dynamic(() => import("./templates/ContactForm"), {
+  ssr: false,
+});
 
+export default async function Page() {
+  // El arreglo vacío asegura que este efecto se ejecute solo una vez
   return (
     <div>
-      {isComponentLoaded ? <CarouselHero/> :  <CarouselHeroItem
-      title="Cotiza Tu Mejor Plan"
-      description="Compartenos tus datos y te contactaremos enseguida con los planes de salud ISAPRES más convenientes para ti."
-      image="/images/family-1.jpg"
-    />}
-      <HeroButton />
-
-      <Section yPadding="pt-5 pd-10 pb-32">
-        <div className="flex justify-center items-center">
-          <CarouselIsapres />
-        </div>
-      </Section>
-
-      {/* <Section yPadding="pt-10 pd-10 pb-32">
-      <div id='contacto-ejecutiva-isapre' className="flex justify-center items-center" >
-        <ContactForm />
+      <DCarouselHero />
+        <HeroOneButton
+          title={
+            <>
+              {"APROVECHA AL MÁXIMO TU 7%\n"}
+              <span className="text-primary-500">Ejecutivas certificadas</span>
+            </>
+          }
+          description="La forma más rápida y convenienta para contratar Planes de Salud Previsional."
+          button={
+            <Link href="/#contacto-ejecutiva-isapre">
+              <Button xl>Quiero cotizar</Button>
+            </Link>
+          }
+        />
+      
+      <div className="grid place-items-center">
+        <Image
+          src={"/images/familia4.png"}
+          height={828}
+          width={518}
+          alt=""
+          priority
+          style={{ width: "auto", height: "auto" }}
+        />
       </div>
-    </Section> */}
+
+        <div className="flex justify-center items-center">
+          <DCarouselIsapres />
+        </div>
+
+        <div
+          id="contacto-ejecutiva-isapre"
+          className="flex justify-center items-center"
+        >
+          <DContactForm />
+        </div>
     </div>
   );
 }

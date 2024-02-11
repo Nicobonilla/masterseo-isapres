@@ -12,7 +12,6 @@ export default async function Hero () {
   return(
   <div>
     <CarouselHero />
-    <Section yPadding="pt-40 pd-10 pb-32">
       <HeroOneButton
         title={
           <>
@@ -27,18 +26,13 @@ export default async function Hero () {
           </Link>
         }
       />
-    </Section >
 
-    <Section yPadding="pt-5 pd-10 pb-32">
       <div className="flex justify-center items-center" >
         <CarouselIsapres />
       </div>
-    </Section>
 
-    <Section yPadding="pt-10 pd-10 pb-32">
       <div id='contacto-ejecutiva-isapre' className="flex justify-center items-center" >
         <ContactForm />
       </div>
-    </Section>
   </div>
 )};
