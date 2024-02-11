@@ -1,7 +1,7 @@
 const image1 = '/images/isapres/banmedica.png'
 const image2 = '/images/isapres/colmena.png'
 const image3 = '/images/isapres/consalud.png'
-const image4 = '/images/isapres/cruz-blanca.png'
+const image4 = '/images/isapres/esencial.png'
 const image6 = '/images/isapres/vida-tres.png'
 const image5 = '/images/isapres/mas-vida.png'
 

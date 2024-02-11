@@ -16,54 +16,60 @@ const CarouselHeroItemIsapre = ({
         <div className="md:pl-20  xl:pl-60">
           <Image
             src={"/images/isapres/banmedica.png"}
-            height={200}
-            width={800}
+            height={"200"}
+            width={"800"}
+            objectFit="contain"
             alt=""
           />
         </div>
         <div className="lg:pl-20 xl:pl-60">
           <Image
             src={"/images/isapres/colmena.png"}
-            height={200}
-            width={800}
+            height={"200"}
+            width={"800"}
+            objectFit="contain"
             alt=""
           />
         </div>
         <div className="md:pl-20 xl:px-32">
           <Image
             src={"/images/isapres/consalud.png"}
-            height={200}
-            width={800}
+            height={"200"}
+            width={"800"}
+            objectFit="contain"
             alt=""
           />
         </div>
         <div className="md:pl-20 xl:pl-60">
           <Image
-            src={"/images/isapres/esencial.png"}
-            height={200}
-            width={800}
+            src={"/images/isapres/cruz-blanca.png"}
+            height={"200"}
+            width={"800"}
+            objectFit="contain"
             alt=""
           />
         </div>
         <div className="md:pl-20 xl:pl-60">
           <Image
             src={"/images/isapres/mas-vida.png"}
-            height={200}
-            width={800}
+            height={"200"}
+            width={"800"}
+            objectFit="contain"
             alt=""
           />
         </div>
         <div className="md:pl-20 xl:px-32">
-          <Image
+          <Image 
             src={"/images/isapres/vida-tres.png"}
-            height={200}
-            width={800}
+            height={"200"}
+            width={"800"}
+            objectFit="contain"
             alt=""
           />
         </div>
       </div>
       <div className="absolute inset-0 grid h-full w-full items-end bg-black/65">
-        <div className="w-3/4 text-center md:w-2/4">
+        <div className="w-3/4 pl-12 pb-12 md:w-2/4 md:pl-20 md:pb-20 lg:pl-32 lg:pb-32">
           <Typography
             placeholder={"place"}
             variant="h1"
