@@ -39,7 +39,7 @@ const CarouselHeroItemIsapre = ({
         </div>
         <div className="md:pl-20 xl:pl-60">
           <Image
-            src={"/images/isapres/cruz-blanca.png"}
+            src={"/images/isapres/esencial.png"}
             height={200}
             width={800}
             alt=""

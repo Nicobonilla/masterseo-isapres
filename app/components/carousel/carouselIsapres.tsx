@@ -1,3 +1,4 @@
+'use client';
 import { Card, CardContent } from "@/components/ui/card";
 import imageByIndex from "./imageByIndex";
 import {
@@ -9,7 +10,7 @@ import {
 } from "@/components/ui/carousel";
 import Image from "next/image";
 
-const CarouselIsapres = () => {
+export default function CarouselIsapres () {
   return (
     <Carousel
       opts={{ align: "center", loop: true, dragFree: true }}
@@ -40,4 +41,3 @@ const CarouselIsapres = () => {
   );
 };
 
-export { CarouselIsapres };
