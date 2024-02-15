@@ -1,19 +1,28 @@
-"use client";
-import { Card, Input, Checkbox, Typography } from "@material-tailwind/react";
 import { Button } from "../components/button/Button";
 import { useState } from "react";
 
+type Tform = {
+  nombre: string;
+  rut: string;
+  edad: string;
+  celular: string;
+  comuna: string;
+  email: string;
+  rentaImponible: string;
+  cantidadCargas: string;
+  comentario: string;
+};
+
 export default function ContactForm() {
-  const [formulario, setFormulario] = useState({
+  const [formulario, setFormulario] = useState<Tform>({
     nombre: "",
     rut: "",
-    edad: 0,
+    edad: "",
     celular: "",
     comuna: "",
     email: "",
-    rentaImponible: 0,
-    tipoPlan: "",
-    cantidadCargas: 0,
+    rentaImponible: "", // Asegúrate de que este campo sea tratado correctamente como número
+    cantidadCargas: "",
     comentario: "",
   });
 
@@ -50,164 +59,126 @@ export default function ContactForm() {
   };
 
   return (
-    <Card color="transparent" shadow={false}>
+    <div>
       <header className="grid-2 text-center">
-        <h1 className="whitespace-pre-line text-5xl font-bold leading-hero text-gray-900">
-          Contiza con nosotros
-        </h1>
-        <h2 color="gray" className="mb-5 mt-4 text-sm md:text-xl lg:text-2xl text-primary-600">
+        <h1
+          color="gray"
+          className="mb-5 mt-4 text-2xl md:text-4xl text-primary-600"
+        >
           Déjanos tus datos y te contactaremos para ayudarte a cotizar Planes de
           ISAPRE
-        </h2>
+        </h1>
       </header>
-      <section className="flex justify-center items-center">
+
+      <section className="flex justify-center items-center w-full">
         <form onSubmit={handleSubmit} className="w-full max-w-xl p-5">
-          <div className="flex flex-wrap -mx-2">
+          <div className="flex flex-wrap w-full ">
             {/* Nombre Completo - Ocupa todo el ancho */}
-            <div className="w-full px-2 mb-4">
-              <Typography variant="h6" color="blue-gray" className="-mb-30">
+            <div className="w-full">
+              <label className="text-gray-500 mt-2 text-xs">
                 Nombre Completo
-              </Typography>
-              <Input
+              </label>
+              <input
                 name="nombre"
                 type="text"
                 value={formulario.nombre}
                 onChange={manejarCambio}
-                size="lg"
-                placeholder="Jose Tomás Bonilla Marín"
+                placeholder="Nombre Completo"
+                className="px-4 py-2 w-full rounded border border-gray-500"
                 required
               />
             </div>
-
-            {/* Primera columna de campos */}
-            <div className="w-full sm:w-1/2 px-2 mb-4">
-              {/* Rut (chileno) */}
-              <Typography variant="h6" color="blue-gray" className="-mb-30">
-                Rut
-              </Typography>
-              <Input
-                name="rut"
-                type="text"
-                value={formulario.rut}
-                onChange={manejarCambio}
-                size="lg"
-                placeholder="12345678-9"
-              />
-
-              {/* Edad */}
-              <Typography variant="h6" color="blue-gray" className="-mb-30">
-                Edad
-              </Typography>
-              <Input
-                name="edad"
-                type="number"
-                value={formulario.edad}
-                onChange={manejarCambio}
-                size="lg"
-                placeholder="30"
-              />
-
-              {/* Celular */}
-              <Typography variant="h6" color="blue-gray" className="-mb-30">
-                Celular
-              </Typography>
-              <Input
-                name="celular"
-                type="tel"
-                value={formulario.celular}
-                onChange={manejarCambio}
-                size="lg"
-                placeholder="+569 1234 5678"
-              />
-
-              {/* Comuna */}
-              <Typography variant="h6" color="blue-gray" className="-mb-30">
-                Comuna
-              </Typography>
-              <Input
-                name="comuna"
-                type="text"
-                value={formulario.comuna}
-                onChange={manejarCambio}
-                size="lg"
-                placeholder="Santiago"
-              />
+            <div className="grid grid-cols-2">
+              <div className="mr-1">
+                <label className="text-gray-500 mt-2 text-xs">R.U.T</label>
+                <input
+                  name="rut"
+                  type="text"
+                  value={formulario.rut}
+                  onChange={manejarCambio}
+                  placeholder="R.U.T"
+                  className="px-4 py-2 r-1 w-full rounded border border-gray-500"
+                />
+              </div>
+              <div className="ml-1">
+                <label className="text-gray-500 mt-2 text-xs">Edad</label>
+                <input
+                  name="edad"
+                  type="number"
+                  value={formulario.edad}
+                  onChange={manejarCambio}
+                  placeholder="Edad"
+                  className="px-4 py-2 w-full rounded border border-gray-500"
+                />
+              </div>
+              <div className="mr-1">
+                <label className="text-gray-500 mt-2 text-xs">Celular</label>
+                <input
+                  name="celular"
+                  type="tel"
+                  value={formulario.celular}
+                  onChange={manejarCambio}
+                  placeholder="Celular"
+                  className="px-4 py-2 w-full rounded border border-gray-500"
+                />
+              </div>
+              <div className="ml-1">
+                <label className="text-gray-500 mt-2 text-xs">
+                  Ciudad / Comuna
+                </label>
+                <input
+                  name="comuna"
+                  type="text"
+                  value={formulario.comuna}
+                  onChange={manejarCambio}
+                  placeholder="Ciudad / Comuna"
+                  className="px-4 py-2 w-full rounded border border-gray-500"
+                />
+              </div>
+              <div className="mr-1">
+                <label className="text-gray-500 mt-2 text-xs">Email</label>
+                <input
+                  name="email"
+                  type="email"
+                  value={formulario.email}
+                  onChange={manejarCambio}
+                  placeholder="Email"
+                  className="px-4 py-2 w-full rounded border border-gray-500"
+                />
+              </div>
+              <div className="ml-1">
+                <label className="text-gray-500 mt-2 text-xs">
+                  Renta Imponible
+                </label>
+                <input
+                  name="rentaImponible"
+                  type="text"
+                  value={formulario.rentaImponible}
+                  onChange={manejarCambio}
+                  placeholder="Renta Imponible"
+                  className="px-4 py-2 w-full rounded border border-gray-500"
+                />
+              </div>
             </div>
-
-            {/* Segunda columna de campos */}
-            <div className="w-full sm:w-1/2 px-2 mb-4">
-              {/* Email */}
-              <Typography variant="h6" color="blue-gray" className="-mb-30">
-                Email
-              </Typography>
-              <Input
-                name="email"
-                type="email"
-                value={formulario.email}
-                onChange={manejarCambio}
-                size="lg"
-                placeholder="name@mail.com"
-              />
-
-              {/* Renta Imponible */}
-              <Typography variant="h6" color="blue-gray" className="-mb-30">
-                Renta Imponible
-              </Typography>
-              <Input
-                name="rentaImponible"
-                type="text"
-                value={formulario.rentaImponible}
-                onChange={manejarCambio}
-                size="lg"
-                placeholder="$1.000.000"
-              />
-
-              {/* Tipo de Plan */}
-              <Typography variant="h6" color="blue-gray" className="-mb-30">
-                Tipo de Plan
-              </Typography>
-              <Input
-                name="tipoPlan"
-                type="text"
-                value={formulario.tipoPlan}
-                onChange={manejarCambio}
-                size="lg"
-                placeholder="Plan Individual, Colectivo..."
-              />
-
-              {/* Cantidad de Cargas */}
-              <Typography variant="h6" color="blue-gray" className="-mb-30">
-                Cantidad de Cargas
-              </Typography>
-              <Input
-                name="cantidadCargas"
-                type="number"
-                value={formulario.cantidadCargas}
-                onChange={manejarCambio}
-                size="lg"
-                placeholder="0"
-              />
-            </div>
-
-            {/* Comentario - Ocupa todo el ancho */}
-            <div className="w-full px-2 mb-4">
-              <Typography variant="h6" color="blue-gray" className="-mb-30">
-                Comentario
-              </Typography>
-              <Input
+            <div className="w-full content-center">
+              <label className="text-gray-500 mt-2 text-xs">Comentario</label>
+              <input
                 name="comentario"
                 type="textarea"
                 value={formulario.comentario}
                 onChange={manejarCambio}
-                size="lg"
                 placeholder="Tu comentario.."
+                className="px-4 py-2 w-full rounded border border-gray-500"
               />
             </div>
-
-            <Button onClick={handleSubmit}>Enviar</Button>
+            <div className="w-full justify-center items-center cursor-pointer">
+              <Button xl onClick={handleSubmit}>
+                COTIZAR GRATIS{" "}
+              </Button>
+            </div>
           </div>
         </form>
       </section>
-    </Card>
+    </div>
   );
 }

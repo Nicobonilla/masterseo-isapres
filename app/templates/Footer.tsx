@@ -8,7 +8,7 @@ import { usePathname } from "next/navigation";
 // type Props = {
 //   params : { id_noticia: string}
 // }
-const Footer = ( { params } : Props) => {
+const Footer = ( ) => {
   // const { id_noticia } = params; 
   // const pathname: string | null = path.split("/")[1];
   return (

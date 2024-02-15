@@ -57,7 +57,7 @@ export default async function Page({ params }: Props) {
   const { id_noticia } = params;
   const data = await getArticle(id_noticia);
   return (
-    <Section yPadding="py-0">
+    <Section add="py-0">
       <ArticleLayout params={data} />
     </Section>
   );

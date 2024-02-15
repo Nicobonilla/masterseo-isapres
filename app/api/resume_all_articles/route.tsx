@@ -7,7 +7,7 @@ export async function GET() {
     try {
       const article_list = await prisma.article_content_view.findMany({
       });
-  
+      console.log("api")
       return new NextResponse(JSON.stringify(article_list), {
         status: 200, // HTTP status code
         headers: {

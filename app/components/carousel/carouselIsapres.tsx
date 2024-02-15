@@ -8,22 +8,34 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@/components/ui/carousel";
+import Autoplay from "embla-carousel-autoplay";
+import { EmblaPluginType } from 'embla-carousel';
+import useEmblaCarousel from 'embla-carousel-react';
 import Image from "next/image";
 
-export default function CarouselIsapres () {
+type Props = {
+  plugins?: EmblaPluginType[];
+}
+export default function CarouselIsapres ({plugins} : Props) {
+  const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true }, plugins)
   return (
     <Carousel
-      opts={{ align: "center", loop: true, dragFree: true }}
-      className="w-full"
+    className='mb-5 xl:w-2/3'
+      opts={{ align: "center", loop: true, dragFree: true}}
+      plugins={[
+        Autoplay({
+          delay: 5000,
+        }),
+      ]}
     >
       <CarouselContent>
         {Array.from({ length: 6 }).map((_, index) => (
           <CarouselItem
             key={index}
-            className="sm:basis-1 md:basis-1/2 lg:basis-1/3  w-full"
+            className="md:basis-1/3 lg:basis-1/4 w-full xl:w-1/2"
           >
             <Card>
-              <CardContent className="sm:h-[50vh] md:h-[50vh] lg:h-[15vh] flex items-center justify-center p-2">
+              <CardContent className="xl:h-1/12 items-center pt-5">
                 <Image
                   src={imageByIndex(index)}
                   height={200}
@@ -35,8 +47,6 @@ export default function CarouselIsapres () {
           </CarouselItem>
         ))}
       </CarouselContent>
-      <CarouselPrevious />
-      <CarouselNext />
     </Carousel>
   );
 };

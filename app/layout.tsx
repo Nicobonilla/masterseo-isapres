@@ -1,14 +1,26 @@
 import React from 'react';
 import { Background } from './components/background/Background';
-import { NavbarTwoColumns } from './components/navigation/NavbarTwoColumns';
+import NavbarTwoColumns from './components/navigation/NavbarTwoColumns';
 import { Logo } from './templates/Logo';
 import { Banner } from './templates/Banner';
 import { Footer } from './templates/Footer';
-import { Inter } from 'next/font/google'
+import { Inter, Manrope } from "next/font/google";
 import './globals.css'
-import type { Metadata } from 'next'
+import type { Metadata } from 'next';
+import Script from "next/script";
 
-const inter = Inter({ subsets: ['latin'] })
+const inter = Inter({
+  subsets: ["latin"],
+  display: "swap",
+  variable: "--font-in",
+});
+
+const manrope = Manrope({
+  subsets: ["latin"],
+  display: "swap",
+  variable: "--font-mr",
+});
+
 
 export const metadata: Metadata = {
   title: { absolute: 'RED ISAPRES | ATENCIÓN PERSONALIZADA',
@@ -23,22 +35,17 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en">
+    <html lang="en" className={`${inter.variable} ${manrope.variable}`}>
       <body className={inter.className}>
-      <div>
-      {/* <Meta title={title} description={description} />z */}
-      <Background color="bg-background text-foreground">
+      <div className="w-full bg-background text-foreground">
         <div>
-          <NavbarTwoColumns logo={<Logo xl />}>
-            <div id='top'></div> {/* just for href=#top  {children}*/}
+          <NavbarTwoColumns>
+            <Logo xl /> 
           </NavbarTwoColumns>
         {children}
         </div>
-      </Background>
-      <Banner />
+      </div>
       <Footer />
-    </div>
-        
         </body>
     </html>
   )
