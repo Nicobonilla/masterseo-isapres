@@ -1,7 +1,7 @@
 import { type NextRequest, NextResponse } from "next/server";
 import nodemailer from "nodemailer";
 import { render } from "@react-email/render";
-import { Email } from "../../templates/Email";
+import Email from "../../templates/Email";
 
 export async function POST(request: NextRequest) {
   const {
@@ -12,8 +12,6 @@ export async function POST(request: NextRequest) {
     comuna,
     email,
     rentaImponible,
-    tipoPlan,
-    cantidadCargas,
     comentario,
   } = await request.json();
 
@@ -26,8 +24,6 @@ export async function POST(request: NextRequest) {
       comuna={comuna}
       email={email}
       rentaImponible={rentaImponible}
-      tipoPlan={tipoPlan}
-      cantidadCargas={cantidadCargas}
       comentario={comentario}
     />
   );

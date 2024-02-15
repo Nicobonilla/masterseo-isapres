@@ -14,7 +14,7 @@ interface EmailProps {
     comentario: string;
   }
 
-export function Email(props: EmailProps) {
+export default function Email(props: EmailProps) {
   const { nombre, rut, edad, celular, comuna, email, rentaImponible, tipoPlan, cantidadCargas, comentario } = props;
 
   return (

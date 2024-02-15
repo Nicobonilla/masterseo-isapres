@@ -1,7 +1,8 @@
 import { Button } from "../components/button/Button";
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 
-type Tform = {
+type TForm = {
   nombre: string;
   rut: string;
   edad: string;
@@ -13,18 +14,46 @@ type Tform = {
   comentario: string;
 };
 
+const iniForm: TForm = {
+  nombre: "",
+  rut: "",
+  edad: "",
+  celular: "",
+  comuna: "",
+  email: "",
+  rentaImponible: "", // Asegúrate de que este campo sea tratado correctamente como número
+  cantidadCargas: "",
+  comentario: "",
+};
+async function sendEmail(formEmail: TForm) {
+  try {
+    const response = await fetch("/api/email", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(formEmail),
+    });
+
+    const data = await response.json();
+    if (data.message) {
+      console.log("Email sent successfully");
+      // Handle success (e.g., show a success message)
+    } else if (data.error) {
+      console.error("Failed to send email:", data.error);
+      // Handle failure (e.g., show an error message)
+    }
+  } catch (error) {
+    console.error("Error:", error);
+    // Handle network error (e.g., show an error message)
+  }
+}
+
 export default function ContactForm() {
-  const [formulario, setFormulario] = useState<Tform>({
-    nombre: "",
-    rut: "",
-    edad: "",
-    celular: "",
-    comuna: "",
-    email: "",
-    rentaImponible: "", // Asegúrate de que este campo sea tratado correctamente como número
-    cantidadCargas: "",
-    comentario: "",
-  });
+  const [submitted, setSubmitted] = useState(false);
+  const [errorSubmit, setErrorSubmit] = useState(false);
+  const [formulario, setFormulario] = useState<TForm>(iniForm);
+  const router = useRouter();
 
   const manejarCambio = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormulario({
@@ -35,26 +64,26 @@ export default function ContactForm() {
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    try {
-      const response = await fetch("/api/email", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(formulario),
-      });
-
-      const data = await response.json();
-      if (data.message) {
-        console.log("Email sent successfully");
-        // Handle success (e.g., show a success message)
-      } else if (data.error) {
-        console.error("Failed to send email:", data.error);
-        // Handle failure (e.g., show an error message)
-      }
-    } catch (error) {
-      console.error("Error:", error);
-      // Handle network error (e.g., show an error message)
+    setSubmitted(true);
+    if (
+      formulario.nombre &&
+      formulario.rut &&
+      formulario.edad &&
+      formulario.celular.length > 8 &&
+      formulario.rentaImponible &&
+      [9, 10].includes(formulario.rut.length) &&
+      formulario.rut.length >= 9 &&
+      formulario.rut.includes("-") &&
+      formulario.email.includes("@") && 
+      formulario.email.includes(".")
+    ) {
+      setErrorSubmit(false);
+      sendEmail(formulario);
+      setSubmitted(false);
+      setFormulario(iniForm);
+      router.push("/informacion-isapres-chile");
+    } else {
+      setErrorSubmit(true);
     }
   };
 
@@ -75,9 +104,7 @@ export default function ContactForm() {
           <div className="flex flex-wrap w-full ">
             {/* Nombre Completo - Ocupa todo el ancho */}
             <div className="w-full">
-              <label className="text-gray-500 mt-2 text-xs">
-                Nombre Completo
-              </label>
+              <label className="text-gray-500 mt-2 text-xs">Nombre Completo</label>
               <input
                 name="nombre"
                 type="text"
@@ -87,6 +114,11 @@ export default function ContactForm() {
                 className="px-4 py-2 w-full rounded border border-gray-500"
                 required
               />
+              {submitted && !formulario.nombre && (
+                <p className="text-red-500 text-xs italic">
+                  Debe ingresar un valor válido
+                </p>
+              )}
             </div>
             <div className="grid grid-cols-2">
               <div className="mr-1">
@@ -98,18 +130,35 @@ export default function ContactForm() {
                   onChange={manejarCambio}
                   placeholder="R.U.T"
                   className="px-4 py-2 r-1 w-full rounded border border-gray-500"
+                  required
                 />
+                {submitted &&
+                  (!formulario.rut ||
+                    !(
+                      [9, 10].includes(formulario.rut.length) &&
+                      formulario.rut.includes("-")
+                    )) && (
+                    <p className="text-red-500 text-xs italic">
+                      Debe ingresar un valor válido. Ej: 12345678-9
+                    </p>
+                  )}
               </div>
               <div className="ml-1">
                 <label className="text-gray-500 mt-2 text-xs">Edad</label>
                 <input
                   name="edad"
-                  type="number"
+                  type="text"
                   value={formulario.edad}
                   onChange={manejarCambio}
                   placeholder="Edad"
                   className="px-4 py-2 w-full rounded border border-gray-500"
+                  required
                 />
+                {submitted && !formulario.edad && (
+                  <p className="text-red-500 text-xs italic">
+                    Debe ingresar un valor válido
+                  </p>
+                )}
               </div>
               <div className="mr-1">
                 <label className="text-gray-500 mt-2 text-xs">Celular</label>
@@ -120,7 +169,14 @@ export default function ContactForm() {
                   onChange={manejarCambio}
                   placeholder="Celular"
                   className="px-4 py-2 w-full rounded border border-gray-500"
+                  required
                 />
+                {submitted &&
+                  !(formulario.celular && formulario.celular.length > 8) && (
+                    <p className="text-red-500 text-xs italic">
+                      Debe ingresar un teléfono de 9 dígitos Ej: 9 1234 1234
+                    </p>
+                  )}
               </div>
               <div className="ml-1">
                 <label className="text-gray-500 mt-2 text-xs">
@@ -144,7 +200,17 @@ export default function ContactForm() {
                   onChange={manejarCambio}
                   placeholder="Email"
                   className="px-4 py-2 w-full rounded border border-gray-500"
+                  required
                 />
+                {submitted && !(
+                  formulario.email &&
+                  formulario.email.includes("@") &&
+                  formulario.email.includes(".")
+                  ) && (
+                    <p className="text-red-500 text-xs italic">
+                      Debe ingresar un email válido. Ej: email@mail.com
+                    </p>
+                  )}
               </div>
               <div className="ml-1">
                 <label className="text-gray-500 mt-2 text-xs">
@@ -157,7 +223,13 @@ export default function ContactForm() {
                   onChange={manejarCambio}
                   placeholder="Renta Imponible"
                   className="px-4 py-2 w-full rounded border border-gray-500"
+                  required
                 />
+                {submitted && !formulario.rentaImponible && (
+                  <p className="text-red-500 text-xs italic">
+                    Debe ingresar su renta imponible
+                  </p>
+                )}
               </div>
             </div>
             <div className="w-full content-center">
