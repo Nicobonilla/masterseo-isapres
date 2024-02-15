@@ -14,7 +14,7 @@ export default function CarouselHeroItemIsapre({
 
   return (
     <div className="relative h-[70vh] w-full pt-5 content-center">
-      <div className="absolute w-full inset-0 flex flex-wrap pt-10 grid xl:w-1/2grid-cols-2 lg:grid-cols-3 bg-white">
+      <div className="absolute w-full inset-0 flex flex-wrap pt-10 grid grid-cols-2 lg:grid-cols-3 xl:w-1/2 bg-white">
       {Array.from({ length: 6 }).map((_, index) => (
           <Image key={index} 
           className={"h-full w-full md:pb-10 md:pl-20 md:w-3/5 lg:w-2/3 xl:w-1/2 xl:pl-6 object-contain"}
