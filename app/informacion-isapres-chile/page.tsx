@@ -3,9 +3,15 @@ import { InformacionIsapresChileItem } from "./InformacionIsapresChileItem";
 import { Section } from "../components/layout/Section";
 import { Metadata, ResolvingMetadata } from "next";
 
-export async function generateMetadata(): Promise<Metadata> {
+export async function generateMetadata(
+  parent: ResolvingMetadata
+): Promise<Metadata> {
+  const previousImages = (await parent).openGraph?.images || []
   return {
     title: "Información sobre el Sistema de Salud Previsional chileno",
+    openGraph: {
+      images: ['/imagenes/FOTO', ...previousImages],
+    },
   };
 }
 

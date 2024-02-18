@@ -31,8 +31,13 @@ export async function generateMetadata(
   parent: ResolvingMetadata
 ): Promise<Metadata> {
   const { data }  = await getArticle(params.id_noticia);
+   // optionally access and extend (rather than replace) parent metadata
+  const previousImages = (await parent).openGraph?.images || []
   return {
     title: await data.titles,
+     openGraph: {
+      images: [data.titles.urlimg, ...previousImages],
+    },
   };
 };
 // Return a list of `params` to populate the [slug] dynamic segment
