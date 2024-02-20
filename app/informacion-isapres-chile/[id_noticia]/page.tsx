@@ -2,6 +2,7 @@
 import { Section } from "../../components/layout/Section";
 import ArticleLayout from "./ArticleLayout";
 import { Metadata, ResolvingMetadata } from "next";
+import Roots from '../../components/utils/Roots';
 
 type Contenido = {
   id: number;
@@ -42,9 +43,11 @@ export async function generateMetadata(
 };
 // Return a list of `params` to populate the [slug] dynamic segment
 export async function generateStaticParams() {
-  const posts = await fetch(
-    "http://localhost:3000/api/resume_all_articles"
+  const posts = await fetch(Roots()+"api/resume_all_articles"
   ).then((res) => res.json());
+  console.log(posts.map((article: Titles) => ({
+    id_noticia: article.idnoticia,
+  })));
   return posts.map((article: Titles) => ({
     id_noticia: article.idnoticia,
   }));
@@ -52,7 +55,7 @@ export async function generateStaticParams() {
 
 async function getArticle(id_noticia : string) {
   const response = await fetch(
-    `http://localhost:3000/api/articles/${id_noticia}`
+    `${Roots()}api/articles/${id_noticia}`
   );
   if (!response.ok) throw new Error("Network response was not ok.");
   return await response.json();

@@ -6,6 +6,7 @@ import { Inter, Manrope } from "next/font/google";
 import "./globals.css";
 import type { Metadata } from "next";
 import JsonLdHome from "./components/jsonLd/JsonLdHome";
+import Roots from './components/utils/Roots';
 
 const inter = Inter({
   subsets: ["latin"],
@@ -20,7 +21,7 @@ const manrope = Manrope({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL('http://localhost:3000/'),
+  metadataBase: new URL(Roots()),
   title: {
     absolute: "RED ISAPRES | ATENCIÓN PERSONALIZADA",
     template: "%s  |  Red Isapres",

@@ -15,7 +15,9 @@ const Footer = ( ) => {
     <Background color="bg-gray-100">
       <Section>
         <CenteredFooter
-          logo={<Logo />}
+          logo={ <Link href='/'>
+              <Logo />
+            </Link>}
           iconList={
             <>
               <Link href="/">

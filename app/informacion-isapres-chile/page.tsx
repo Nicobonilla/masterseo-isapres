@@ -2,6 +2,7 @@
 import { InformacionIsapresChileItem } from "./InformacionIsapresChileItem";
 import { Section } from "../components/layout/Section";
 import { Metadata, ResolvingMetadata } from "next";
+import Roots from '../components/utils/Roots';
 
 export async function generateMetadata(): Promise<Metadata> {
   return {
@@ -22,7 +23,7 @@ type Article = {
 
 const getResumeArticles = async () => {
   const content_elements = await fetch(
-    "http://localhost:3000/api/resume_all_articles",
+    Roots()+'api/resume_all_articles',
     {
       method: "GET",
       headers: {
