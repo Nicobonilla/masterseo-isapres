@@ -9,7 +9,7 @@ export default function InfoLayout({children}: Props) {
   return (
     <>
     {children}
-      <Banner add="mt-3" />
+      <Banner />
     </>
   )
 };

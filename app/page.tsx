@@ -6,13 +6,13 @@ import { Button } from "./components/button/Button";
 import CarouselHero from "./components/carousel/CarouselHero";
 import CarouselIsapres from "./components/carousel/CarouselIsapres";
 import ContactForm from "./templates/ContactForm";
-import { Section } from "./components/layout/Section";
 
 export default function Page() {
   // El arreglo vacío asegura que este efecto se ejecute solo una vez
   return (
     <div className="flex flex-col items-center justify-center">
       <CarouselHero />
+
       <HeroOneButton
         title={
           <>
@@ -29,6 +29,7 @@ export default function Page() {
           </div>
         }
       />
+
       <div className="pt-14 p-5">
         <div className="grid place-items-center">
           <Image
@@ -41,6 +42,7 @@ export default function Page() {
           />
         </div>
       </div>
+      
       <div className="flex justify-center items-center">
         <CarouselIsapres />
       </div>
